@@ -4,6 +4,7 @@ import logo from "../Assets/logo.png";
 import logLogo from "../Assets/log-logo.png";
 
 const LoginPage = () => {
+  //Form submit (Login)
   const onFinish = (values) => {
     console.log("Received values:", values);
   };
@@ -34,7 +35,7 @@ const LoginPage = () => {
                 layout="vertical"
                 className="login-form"
               >
-                <h2 className="text-center fw-medium display-5 mb-4">
+                <h2 className="text-center fw-medium display-5 mb-3 montserrat">
                   Login Form
                 </h2>
                 <div className="d-flex mx-auto justify-content-center w-75">

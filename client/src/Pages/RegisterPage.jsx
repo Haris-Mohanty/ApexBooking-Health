@@ -4,9 +4,9 @@ import logo from "../Assets/logo.png";
 import regLogo from "../Assets/reg-logo.png";
 
 const RegisterPage = () => {
+  //Form submit (Register)
   const onFinish = (values) => {
     console.log("Received values:", values);
-    // You can handle form submission logic here
   };
 
   //Password Validation
@@ -36,7 +36,7 @@ const RegisterPage = () => {
                 layout="vertical"
                 className="register-form"
               >
-                <h2 className="text-center fw-medium display-5 mb-4">
+                <h2 className="text-center fw-medium display-5 mb-3 montserrat">
                   Register Form
                 </h2>
                 <div className="d-flex mx-auto justify-content-center w-75">

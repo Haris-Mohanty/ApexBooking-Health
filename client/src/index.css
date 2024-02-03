@@ -1,3 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto&family=Source+Sans+3:wght@400;600;700&display=swap");
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+.sans {
+  font-family: "Source Sans 3", sans-serif;
+}
+
 .register-form {
   max-width: 450px;
   margin: auto;
