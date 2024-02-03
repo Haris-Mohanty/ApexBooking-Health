@@ -4,6 +4,7 @@ import colors from "colors";
 import cors from "cors";
 import morgan from "morgan";
 import connectDB from "./database/db.js";
+import userRoutes from "./routes/userRoutes.js";
 
 // DOTENV CONFIGURATION
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //***** MIDDLEWARE ROUTES *****/
+app.use("/api/v1/auth", userRoutes);
 
 //******** PORTS AND LISTEN *******/
 const port = process.env.PORT || 8080;
