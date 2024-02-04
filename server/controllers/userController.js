@@ -9,12 +9,14 @@ export const register = async (req, res, next) => {
     if (!name || !email || !password) {
       return res.status(422).json({
         message: "Please provide all fields!",
+        success: false,
       });
     }
     //Password validation
     if (password.length < 6) {
       return res.status(422).json({
         message: "Password length should be greater than 6 character",
+        success: false,
       });
     }
 
@@ -22,7 +24,8 @@ export const register = async (req, res, next) => {
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
-        message: "Email Already Exists!",
+        message: "User Already Exists!",
+        success: false,
       });
     }
 
@@ -36,10 +39,12 @@ export const register = async (req, res, next) => {
     await user.save();
     return res.status(201).json({
       user,
+      success: true,
     });
   } catch (err) {
     return res.status(500).json({
       message: "Internal Server Error!",
+      success: false,
       error: err.message,
     });
   }
