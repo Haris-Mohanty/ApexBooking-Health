@@ -2,11 +2,22 @@ import { Form, Input, Button } from "antd";
 import { Link } from "react-router-dom";
 import logo from "../Assets/logo.png";
 import regLogo from "../Assets/reg-logo.png";
+import { registerUser } from "../api/api";
 
 const RegisterPage = () => {
   //Form submit (Register)
-  const onFinish = (values) => {
-    console.log("Received values:", values);
+  const onFinish = async (values) => {
+    const name = values.name;
+    const email = values.email;
+    const password = values.password;
+
+    const data = { name, email, password };
+    try {
+      const { user } = await registerUser(data);
+      console.log(user);
+    } catch (err) {
+      console.log(err.response.data.message);
+    }
   };
 
   //Password Validation
