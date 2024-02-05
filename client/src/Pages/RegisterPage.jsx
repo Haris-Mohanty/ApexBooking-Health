@@ -1,12 +1,14 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../Assets/logo.png";
 import regLogo from "../Assets/reg-logo.png";
 import { registerUser } from "../api/api";
-// import toast, { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
   //Form submit (Register)
   const onFinish = async (values) => {
     const name = values.name;
@@ -15,10 +17,11 @@ const RegisterPage = () => {
 
     const data = { name, email, password };
     try {
-      const { user } = await registerUser(data);
-      console.log(user);
+      await registerUser(data);
+      toast.success("User Registered Successfully!");
+      navigate("/login");
     } catch (err) {
-      console.log(err.response.data.message);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -36,8 +39,6 @@ const RegisterPage = () => {
 
   return (
     <>
-      {/* <Toaster position="bottom-right" reverseOrder={false} /> */}
-
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-6 order-md-2">
