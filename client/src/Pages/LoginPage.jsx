@@ -1,13 +1,28 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../Assets/logo.png";
 import logLogo from "../Assets/log-logo.png";
+import toast from "react-hot-toast";
+import { loginUser } from "../api/api";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   //Form submit (Login)
-  const onFinish = (values) => {
-    console.log("Received values:", values);
+  const onFinish = async (values) => {
+    const email = values.email;
+    const password = values.password;
+    const data = { email, password };
+
+    try {
+      const { token } = await loginUser(data);
+      localStorage.setItem("token", token);
+      toast.success("Login Success!");
+      navigate("/");
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
   };
 
   //Password Validation
