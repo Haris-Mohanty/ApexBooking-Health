@@ -1,8 +1,10 @@
+import React from "react";
 import { Form, Input, Button } from "antd";
 import { Link } from "react-router-dom";
 import logo from "../Assets/logo.png";
 import regLogo from "../Assets/reg-logo.png";
 import { registerUser } from "../api/api";
+// import toast, { Toaster } from "react-hot-toast";
 
 const RegisterPage = () => {
   //Form submit (Register)
@@ -34,6 +36,8 @@ const RegisterPage = () => {
 
   return (
     <>
+      {/* <Toaster position="bottom-right" reverseOrder={false} /> */}
+
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-6 order-md-2">

@@ -1,3 +1,4 @@
+import React from "react";
 import { Form, Input, Button } from "antd";
 import { Link } from "react-router-dom";
 import logo from "../Assets/logo.png";
@@ -20,6 +21,7 @@ const LoginPage = () => {
       );
     }
   };
+
   return (
     <>
       <div className="container-fluid">
