@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../Assets/logo.png";
 import regLogo from "../Assets/reg-logo.png";
 import { registerUser } from "../api/api";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
