@@ -36,7 +36,7 @@ export const loginUser = async (data) => {
 export const getUserInfo = async () => {
   try {
     const response = await axios.post(
-      "/get-user-info",
+      "/auth/get-user-info",
       {},
       {
         headers: {
