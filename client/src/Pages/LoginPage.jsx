@@ -5,9 +5,12 @@ import logo from "../Assets/logo.png";
 import logLogo from "../Assets/log-logo.png";
 import toast from "react-hot-toast";
 import { loginUser } from "../api/api";
+import { useDispatch } from "react-redux";
+import { hideLoading, showLoading } from "../redux/spinnerSlice";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //Form submit (Login)
   const onFinish = async (values) => {
@@ -16,11 +19,14 @@ const LoginPage = () => {
     const data = { email, password };
 
     try {
+      dispatch(showLoading());
       const { token } = await loginUser(data);
+      dispatch(hideLoading());
       localStorage.setItem("token", token);
       toast.success("Login Success!");
       navigate("/");
     } catch (err) {
+      dispatch(hideLoading());
       toast.error(err.response.data.message);
     }
   };

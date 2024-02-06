@@ -5,9 +5,12 @@ import logo from "../Assets/logo.png";
 import regLogo from "../Assets/reg-logo.png";
 import { registerUser } from "../api/api";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { hideLoading, showLoading } from "../redux/spinnerSlice";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //Form submit (Register)
   const onFinish = async (values) => {
@@ -17,10 +20,13 @@ const RegisterPage = () => {
 
     const data = { name, email, password };
     try {
+      dispatch(showLoading());
       await registerUser(data);
+      dispatch(hideLoading());
       toast.success("User Registered Successfully!");
       navigate("/login");
     } catch (err) {
+      dispatch(hideLoading());
       toast.error(err.response.data.message);
     }
   };
