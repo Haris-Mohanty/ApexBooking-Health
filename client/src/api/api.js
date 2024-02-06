@@ -9,14 +9,14 @@ export const registerUser = async (data) => {
       const resData = await response.data;
       return resData;
     } else {
-      throw new Error("Unexcepted Error Occured!");
+      throw new Error("Unexcepted Error Occurred!");
     }
   } catch (err) {
     throw err;
   }
 };
 
-// ************* REGISTER USER **************/
+// ************* LOGIN USER **************/
 export const loginUser = async (data) => {
   try {
     const response = await axios.post("/auth/login", data);
@@ -25,7 +25,31 @@ export const loginUser = async (data) => {
       const resData = await response.data;
       return resData;
     } else {
-      throw new Error("Unexcepted Error Occured!");
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+// ************* GET USER INFO **************/
+export const getUserInfo = async () => {
+  try {
+    const response = await axios.post(
+      "/get-user-info",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
     }
   } catch (err) {
     throw err;

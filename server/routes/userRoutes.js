@@ -1,5 +1,6 @@
 import express from "express";
 import { register, login, getUserInfo } from "../controllers/userController.js";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 
 //router obj
 const router = express.Router();
@@ -12,7 +13,7 @@ router.post("/register", register);
 router.post("/login", login);
 
 //Get user info (for protected routes)
-router.post("/get-user-info", getUserInfo);
+router.post("/get-user-info", authMiddleware, getUserInfo);
 
 //export
 export default router;
