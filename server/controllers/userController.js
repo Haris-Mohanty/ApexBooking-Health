@@ -108,3 +108,32 @@ export const login = async (req, res, next) => {
     });
   }
 };
+
+//********* GET USER INFO (FOR PROTECTED ROUTES) ******/
+export const getUserInfo = async (req, res, next) => {
+  try {
+    //Get user
+    const user = await UserModel.findOne({ _id: req.body.userId });
+    if (!user) {
+      return res.status(404).json({
+        message: "User doesn't exists!",
+        success: false,
+      });
+    }
+
+    //Success response
+    return res.status(200).json({
+      success: true,
+      data: {
+        name: user.name,
+        email: user.email,
+      },
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: "Internal Server Error!",
+      success: false,
+      error: err.message,
+    });
+  }
+};
