@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import Spinner from "./components/Spinner";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import Homepage from "./Pages/Homepage";
+import PublicRoute from "./components/routes/PublicRoute";
 
 function App() {
   return (
@@ -22,8 +23,22 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <RegisterPage />
+            </PublicRoute>
+          }
+        />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
