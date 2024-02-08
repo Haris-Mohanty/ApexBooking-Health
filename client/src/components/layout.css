@@ -1,0 +1,70 @@
+.main {
+  padding: 10px;
+}
+.sidebar {
+  background-color: #003366;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(0, 51, 102, 0.675);
+  margin-right: 20px;
+  height: 97vh;
+  padding: 10px;
+  width: 260px;
+  color: #ffffff;
+}
+.app-logo {
+  height: 20%;
+  width: 100%;
+}
+.content {
+  width: 100%;
+  height: 100%;
+}
+.header {
+  background-color: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.237);
+  margin-bottom: 18px;
+  height: 10vh;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.body {
+  background-color: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.237);
+  height: 84vh;
+  width: 100%;
+  padding: 10px;
+}
+.menu {
+  margin-top: 50px;
+}
+.menu-item {
+  margin-top: 25px;
+}
+
+.menu-item a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 17px;
+}
+.menu-item i {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 17px;
+  margin: 0 12px;
+}
+
+.active-menu-item {
+  color: #ffffff;
+  background-color: #7ec1ff90;
+  padding: 7px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  font-size: 19px;
+}
