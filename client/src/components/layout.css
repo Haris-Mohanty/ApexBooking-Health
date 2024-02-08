@@ -5,11 +5,23 @@
   background-color: #003366;
   border-radius: 5px;
   box-shadow: 0 0 8px rgba(0, 51, 102, 0.675);
-  margin-right: 20px;
+  margin-right: 15px;
   height: 97vh;
   padding: 10px;
-  width: 260px;
-  color: #ffffff;
+  width: 270px;
+  color: #ffffffa8;
+  transition: width 0.3s ease-in-out;
+}
+.collapsed-sidebar {
+  background-color: #003366;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(0, 51, 102, 0.675);
+  margin-right: 15px;
+  height: 97vh;
+  padding: 10px;
+  width: 60px;
+  color: #ffffffa8;
+  transition: width 0.3s ease-in-out;
 }
 .app-logo {
   height: 20%;
@@ -50,7 +62,7 @@
 .menu-item a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 16px;
 }
 .menu-item i {
   color: #ffffff;
@@ -58,13 +70,42 @@
   font-size: 17px;
   margin: 0 12px;
 }
-
 .active-menu-item {
   color: #ffffff;
   background-color: #7ec1ff90;
-  padding: 7px 8px;
   border-radius: 8px;
   font-weight: 600;
   letter-spacing: 0.7px;
   font-size: 19px;
+  padding: 4px;
+}
+.activa-menu-item-collapse {
+  color: #ffffff;
+  background-color: #7ec1ff90;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  font-size: 19px;
+}
+.close-icon {
+  font-size: 23px;
+  color: #222;
+  font-weight: bold;
+  cursor: pointer;
+}
+.menu-icon {
+  font-size: 21px;
+  color: #222;
+  font-weight: bold;
+  cursor: pointer;
+}
+.notification-icon {
+  font-size: 21px;
+  color: #222;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  
 }

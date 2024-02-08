@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./layout.css";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../Assets/logo.png";
 
 const Layout = ({ children }) => {
   const location = useLocation();
+  const [collapsed, setCollapsed] = useState(false);
+  const handleIcon = () => {
+    setCollapsed(!collapsed);
+  };
 
   // Sidenav menu
   const userMenu = [
@@ -41,20 +45,28 @@ const Layout = ({ children }) => {
       <div className="main">
         <div className="d-flex layout">
           {/********** SIDEBAR  ***********/}
-          <div className="sidebar">
-            <img className="app-logo" src={logo} alt={logo} />
+          <div className={collapsed ? "collapsed-sidebar" : "sidebar"}>
+            {collapsed ? (
+              <h3>AH</h3>
+            ) : (
+              <img className="app-logo" src={logo} alt={logo} />
+            )}
+
             <div className="menu">
               {menuTobeRendered.map((menu) => {
                 const isActive = location.pathname === menu.path;
                 return (
                   <div
                     key={menu.name}
-                    className={`d-flex menu-item ${
-                      isActive && "active-menu-item"
+                    className={`d-flex montserrat menu-item ${
+                      isActive &&
+                      (collapsed
+                        ? "activa-menu-item-collapse"
+                        : "active-menu-item")
                     }`}
                   >
                     <i className={menu.icon}></i>
-                    <Link to={menu.path}>{menu.name}</Link>
+                    {!collapsed && <Link to={menu.path}>{menu.name}</Link>}
                   </div>
                 );
               })}
@@ -63,7 +75,17 @@ const Layout = ({ children }) => {
           {/********** MAIN  ***********/}
           <div className="content">
             <div className="header">
-              <i class="ri-menu-line"></i>
+              <div onClick={handleIcon}>
+                {!collapsed ? (
+                  <i className="ri-close-fill close-icon"></i>
+                ) : (
+                  <i className="ri-menu-line menu-icon"></i>
+                )}
+              </div>
+              <div className="d-flex mx-4">
+                <i className="ri-notification-2-line notification-icon"></i>
+                <p>name</p>
+              </div>
             </div>
             <div className="body">{children}</div>
           </div>
