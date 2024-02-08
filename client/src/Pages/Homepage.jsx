@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { getUserInfo } from "../api/api";
+import Layout from "../components/Layout";
 
 const Homepage = () => {
   //Fetch user info
@@ -17,7 +18,9 @@ const Homepage = () => {
   }, []);
   return (
     <>
-      <h1>Homepage</h1>
+      <Layout>
+        <h1>Homepage</h1>
+      </Layout>
     </>
   );
 };
