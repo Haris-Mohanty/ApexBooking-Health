@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import "./layout.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../Assets/logo.png";
+import { useSelector } from "react-redux";
 
 const Layout = ({ children }) => {
+  const { user } = useSelector((state) => state.user);
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  const [isIconClicked, setIsIconClicked] = useState(false);
   const handleIcon = () => {
     setCollapsed(!collapsed);
+  };
+  const handleIcons = () => {
+    setIsIconClicked(!isIconClicked);
   };
 
   // Sidenav menu
@@ -72,9 +78,31 @@ const Layout = ({ children }) => {
               })}
             </div>
           </div>
+
+          {/********** SIDEBAR FOR MOBILE  ***********/}
+          <nav className="NavbarItems">
+            <div className={isIconClicked ? "nav-menu active" : "nav-menu"}>
+              {menuTobeRendered.map((menu) => {
+                const isActive = location.pathname === menu.path;
+                return (
+                  <div
+                    key={menu.name}
+                    className={`d-flex montserrat nav-links ${
+                      isActive && "active-menu-item"
+                    }`}
+                  >
+                    <i className={menu.icon}></i>
+                    {!collapsed && <Link to={menu.path}>{menu.name}</Link>}
+                  </div>
+                );
+              })}
+            </div>
+          </nav>
+
           {/********** MAIN  ***********/}
           <div className="content">
             <div className="header">
+              {/* Desktop Menu Icon */}
               <div onClick={handleIcon}>
                 {!collapsed ? (
                   <i className="ri-close-fill close-icon"></i>
@@ -82,9 +110,20 @@ const Layout = ({ children }) => {
                   <i className="ri-menu-line menu-icon"></i>
                 )}
               </div>
-              <div className="d-flex mx-4">
-                <i className="ri-notification-2-line notification-icon"></i>
-                <p>name</p>
+              {/* Mobile Menu Icon */}
+              <div className="menu-icons d-none" onClick={handleIcons}>
+                {isIconClicked ? (
+                  <i className="ri-close-fill close-mob-icon" />
+                ) : (
+                  <i className="ri-menu-line menu-mob-icon" />
+                )}
+              </div>
+              {/* Notification icon & Name */}
+              <div className="d-flex align-items-center px-4">
+                <i className="ri-notification-2-line notification-icon px-3"></i>
+                <Link className="anchor text-secondary fw-bold" to={"/profile"}>
+                  {user?.name}
+                </Link>
               </div>
             </div>
             <div className="body">{children}</div>
