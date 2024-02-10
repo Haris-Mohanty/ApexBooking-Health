@@ -114,6 +114,7 @@ export const getUserInfo = async (req, res, next) => {
   try {
     //Get user
     const user = await UserModel.findOne({ _id: req.body.userId });
+    user.password = undefined;
     if (!user) {
       return res.status(404).json({
         message: "User doesn't exists!",
@@ -124,10 +125,7 @@ export const getUserInfo = async (req, res, next) => {
     //Success response
     return res.status(200).json({
       success: true,
-      data: {
-        name: user.name,
-        email: user.email,
-      },
+      data: user,
     });
   } catch (err) {
     return res.status(500).json({

@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import "./layout.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../Assets/logo.png";
 import { useSelector } from "react-redux";
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [isIconClicked, setIsIconClicked] = useState(false);
+  console.log(user)
+
   const handleIcon = () => {
     setCollapsed(!collapsed);
   };
@@ -16,7 +19,13 @@ const Layout = ({ children }) => {
     setIsIconClicked(!isIconClicked);
   };
 
-  // Sidenav menu
+  //Logout
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
+  // Nav menu for user
   const userMenu = [
     {
       name: "Home",
@@ -38,13 +47,31 @@ const Layout = ({ children }) => {
       path: "/profile",
       icon: "ri-profile-line",
     },
+  ];
+  //Nav Menu for admin
+  const adminMenu = [
     {
-      name: "Logout",
-      path: "/logout",
-      icon: "ri-logout-box-line",
+      name: "Home",
+      path: "/",
+      icon: "ri-home-2-line",
+    },
+    {
+      name: "Users",
+      path: "/users",
+      icon: "ri-user-line",
+    },
+    {
+      name: "Doctors",
+      path: "/doctors",
+      icon: "ri-user-star-line",
+    },
+    {
+      name: "Profile",
+      path: "/profile",
+      icon: "ri-profile-line",
     },
   ];
-  const menuTobeRendered = userMenu;
+  const menuTobeRendered = user && user.isAdmin ? adminMenu : userMenu;
 
   return (
     <>
@@ -53,7 +80,7 @@ const Layout = ({ children }) => {
           {/********** SIDEBAR  ***********/}
           <div className={collapsed ? "collapsed-sidebar" : "sidebar"}>
             {collapsed ? (
-              <h3>AH</h3>
+              <h3 className="fw-bold">AH</h3>
             ) : (
               <img className="app-logo" src={logo} alt={logo} />
             )}
@@ -76,6 +103,13 @@ const Layout = ({ children }) => {
                   </div>
                 );
               })}
+              <div
+                className={`d-flex montserrat menu-item`}
+                onClick={handleLogout}
+              >
+                <i className="ri-logout-box-line"></i>
+                {!collapsed && <Link to={"/logout"}>Logout</Link>}
+              </div>
             </div>
           </div>
 
@@ -96,6 +130,13 @@ const Layout = ({ children }) => {
                   </div>
                 );
               })}
+              <div
+                className={"d-flex montserrat nav-links"}
+                onClick={handleLogout}
+              >
+                <i className="ri-logout-box-line"></i>
+                {!collapsed && <Link to={"/logout"}>Logout</Link>}
+              </div>
             </div>
           </nav>
 

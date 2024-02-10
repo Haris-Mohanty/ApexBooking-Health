@@ -6,8 +6,7 @@ const Homepage = () => {
   //Fetch user info
   const fetchUserInfo = async () => {
     try {
-      const res = await getUserInfo();
-      console.log(res);
+      await getUserInfo();
     } catch (err) {
       console.log(err);
     }
