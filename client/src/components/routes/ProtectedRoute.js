@@ -24,8 +24,8 @@ const ProtectedRoute = (props) => {
         navigate("/login");
       }
     } catch (err) {
-      localStorage.clear();
       dispatch(hideLoading());
+      localStorage.clear();
       navigate("/login");
     }
   };
