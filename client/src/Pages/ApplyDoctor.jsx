@@ -3,6 +3,11 @@ import React from "react";
 import Layout from "../components/Layout";
 
 const ApplyDoctor = () => {
+  //Form Submit
+  const onFinish = (values) => {
+    console.log("Received values:", values);
+  };
+
   return (
     <>
       <Layout>
@@ -11,8 +16,8 @@ const ApplyDoctor = () => {
           name="doctor-form"
           layout="vertical"
           initialValues={{ remember: true }}
-          //   onFinish={onFinish}
-        //   style={{ maxWidth: "400px", margin: "auto" }}
+          onFinish={onFinish}
+          style={{ maxWidth: "400px", margin: "auto" }}
         >
           <Form.Item
             label="First Name"
