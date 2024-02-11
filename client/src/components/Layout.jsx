@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import "./layout.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../Assets/logo.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../redux/userSlice";
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false);
   const [isIconClicked, setIsIconClicked] = useState(false);
-  console.log(user)
 
   const handleIcon = () => {
     setCollapsed(!collapsed);
@@ -22,6 +23,7 @@ const Layout = ({ children }) => {
   //Logout
   const handleLogout = () => {
     localStorage.clear();
+    dispatch(setUser(null));
     navigate("/login");
   };
 
