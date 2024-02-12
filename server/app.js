@@ -21,7 +21,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //***** MIDDLEWARE ROUTES *****/
-app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/auth", userRoutes);z
 
 //******** PORTS AND LISTEN *******/
 const port = process.env.PORT || 8080;

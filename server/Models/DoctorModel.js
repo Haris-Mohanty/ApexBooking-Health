@@ -14,12 +14,8 @@ const doctorSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    email: {
-      type: String,
-      required: true,
-    },
     phoneNumber: {
-      type: String,
+      type: Number,
       required: true,
     },
     website: {
@@ -27,6 +23,10 @@ const doctorSchema = new mongoose.Schema(
       required: true,
     },
     address: {
+      type: String,
+      required: true,
+    },
+    department: {
       type: String,
       required: true,
     },

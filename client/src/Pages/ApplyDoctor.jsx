@@ -205,7 +205,7 @@ const ApplyDoctor = () => {
                   },
                 ]}
               >
-                <TimePicker.RangePicker />
+                <TimePicker.RangePicker style={{ width: "100%" }} />
               </Form.Item>
             </Col>
           </Row>

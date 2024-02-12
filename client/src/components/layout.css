@@ -48,7 +48,7 @@
   background-color: #fff;
   border-radius: 7px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.237);
-  height: 84vh;
+  min-height: 84vh;
   width: 100%;
   padding: 10px;
 }
@@ -122,9 +122,6 @@
   .menu-icon {
     display: none;
   }
-  /* .body {
-    height: 100%;
-  } */
   .menu-icons {
     display: block !important;
   }
