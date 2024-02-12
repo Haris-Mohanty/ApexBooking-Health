@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 const ApplyDoctor = () => {
   //Form Submit
   const onFinish = (values) => {
-    console.log("Received values:", values);
+    
   };
 
   return (

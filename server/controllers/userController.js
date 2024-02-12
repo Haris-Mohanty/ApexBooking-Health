@@ -1,6 +1,7 @@
 import UserModel from "../Models/UserModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import DoctorModel from "../Models/DoctorModel.js";
 
 export const register = async (req, res, next) => {
   try {
@@ -127,6 +128,38 @@ export const getUserInfo = async (req, res, next) => {
       success: true,
       data: user,
     });
+  } catch (err) {
+    return res.status(500).json({
+      message: "Internal Server Error!",
+      success: false,
+      error: err.message,
+    });
+  }
+};
+
+//************* APPLY DOCTOR ACCOUNT **************/
+export const applyDoctor = async (req, res, next) => {
+  try {
+    //Add doctor
+    const newDoctor = new DoctorModel(req.body);
+    await newDoctor.save();
+
+    //Get user (Admin)
+    const getAdmin = await UserModel.findOne({ isAdmin: true });
+
+    //Push notification to admin
+    const unSeenNotifications = getAdmin.unSeenNotifications;
+    unSeenNotifications.push({
+      type: "new-doctor-request",
+      message: `${newDoctor.firstName} ${newDoctor.lastName} has applied for a doctor account!`,
+      data: {
+        doctorId: newDoctor._id,
+        name: newDoctor.firstName + " " + newDoctor.lastName,
+      },
+      onClickPath: "/admin/doctors",
+    });
+    await UserModel.findByIdAndUpdate(getAdmin._id, { unSeenNotifications });
+    
   } catch (err) {
     return res.status(500).json({
       message: "Internal Server Error!",
