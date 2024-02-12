@@ -122,6 +122,9 @@
   .menu-icon {
     display: none;
   }
+  /* .body {
+    height: 100%;
+  } */
   .menu-icons {
     display: block !important;
   }
