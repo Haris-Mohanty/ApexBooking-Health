@@ -21,7 +21,7 @@ router.post("/login", login);
 router.post("/get-user-info", authMiddleware, getUserInfo);
 
 //Apply Doctor (Doctor is now a user so the routes added in user routes)
-router.post("/apply-doctor", applyDoctor);
+router.post("/apply-doctor", authMiddleware, applyDoctor);
 
 //export
 export default router;

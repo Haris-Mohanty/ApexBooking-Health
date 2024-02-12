@@ -159,7 +159,12 @@ export const applyDoctor = async (req, res, next) => {
       onClickPath: "/admin/doctors",
     });
     await UserModel.findByIdAndUpdate(getAdmin._id, { unSeenNotifications });
-    
+
+    //Response
+    return res.status(201).json({
+      message: "Doctor Account Applied Successfully!",
+      success: true,
+    });
   } catch (err) {
     return res.status(500).json({
       message: "Internal Server Error!",

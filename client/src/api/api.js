@@ -55,3 +55,22 @@ export const getUserInfo = async () => {
     throw err;
   }
 };
+
+// ********* APPLY DOCTOR ACCOUNT ************/
+export const applyDoctorAccount = async (data) => {
+  try {
+    const response = await axios.post("/auth/apply-doctor", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (response.status === 201) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};

@@ -1,11 +1,31 @@
 import { Button, Col, Form, Input, InputNumber, Row, TimePicker } from "antd";
 import React from "react";
 import Layout from "../components/Layout";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { hideLoading, showLoading } from "../redux/spinnerSlice";
+import { applyDoctorAccount } from "../api/api";
 
 const ApplyDoctor = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.user);
+
   //Form Submit
-  const onFinish = (values) => {
-    
+  const onFinish = async (values) => {
+    const userId = user._id;
+    const data = { ...values, userId };
+    try {
+      dispatch(showLoading());
+      await applyDoctorAccount(data);
+      dispatch(hideLoading());
+      navigate("/");
+    } catch (err) {
+      dispatch(hideLoading());
+      toast.error(err.response.data.message);
+    }
   };
 
   return (
