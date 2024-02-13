@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/routes/ProtectedRoute";
 import Homepage from "./Pages/Homepage";
 import PublicRoute from "./components/routes/PublicRoute";
 import ApplyDoctor from "./Pages/ApplyDoctor";
+import Notification from "./Pages/Notification";
 
 function App() {
   return (
@@ -30,6 +31,14 @@ function App() {
           element={
             <ProtectedRoute>
               <ApplyDoctor />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <Notification />
             </ProtectedRoute>
           }
         />

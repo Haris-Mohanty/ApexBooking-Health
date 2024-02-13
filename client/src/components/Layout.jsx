@@ -166,7 +166,8 @@ const Layout = ({ children }) => {
               <div className="d-flex align-items-center px-4">
                 <Badge
                   count={user?.unSeenNotifications.length}
-                  style={{ position: "absolute", top: "0", right: "15px" }}
+                  style={{ position: "absolute", top: "0", right: "13px" }}
+                  onClick={() => navigate("/notifications")}
                 >
                   <i className="ri-notification-2-line notification-icon px-3"></i>
                 </Badge>
