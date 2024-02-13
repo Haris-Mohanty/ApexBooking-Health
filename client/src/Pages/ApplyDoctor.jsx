@@ -21,6 +21,7 @@ const ApplyDoctor = () => {
       dispatch(showLoading());
       await applyDoctorAccount(data);
       dispatch(hideLoading());
+      toast.success("Doctor account applied successfully!");
       navigate("/");
     } catch (err) {
       dispatch(hideLoading());

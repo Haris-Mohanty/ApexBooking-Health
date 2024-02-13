@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../Assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/userSlice";
+import { Badge } from "antd";
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
@@ -163,7 +164,12 @@ const Layout = ({ children }) => {
               </div>
               {/* Notification icon & Name */}
               <div className="d-flex align-items-center px-4">
-                <i className="ri-notification-2-line notification-icon px-3"></i>
+                <Badge
+                  count={user?.unSeenNotifications.length}
+                  style={{ position: "absolute", top: "0", right: "15px" }}
+                >
+                  <i className="ri-notification-2-line notification-icon px-3"></i>
+                </Badge>
                 <Link className="anchor text-secondary fw-bold" to={"/profile"}>
                   {user?.name}
                 </Link>
