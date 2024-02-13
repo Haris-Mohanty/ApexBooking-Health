@@ -1,12 +1,25 @@
 import React from "react";
 import Layout from "../components/Layout";
 import { Tabs } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { hideLoading, showLoading } from "../redux/spinnerSlice";
 
 const Notification = () => {
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const markAllAsSeen = async () => {
+    const userId = user._id;
+    try {
+      dispatch(showLoading());
+      
+      dispatch(hideLoading());
+    } catch (err) {
+      dispatch(hideLoading());
+    }
+  };
 
   return (
     <>
@@ -15,7 +28,10 @@ const Notification = () => {
         <Tabs>
           <Tabs.TabPane tab="Unseen" key={"unseen"}>
             <div className="d-flex justify-content-end">
-              <h6 className="underline cursor-pointer sans link-success mb-3">
+              <h6
+                className="underline cursor-pointer sans link-success mb-3"
+                onClick={() => markAllAsSeen()}
+              >
                 Mark all as seen
               </h6>
             </div>

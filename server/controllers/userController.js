@@ -173,3 +173,15 @@ export const applyDoctor = async (req, res, next) => {
     });
   }
 };
+
+//************ MARK ALL NOTIFICATIONS AS SEEN *******************/
+export const markAllNotificationsAsSeen = async (req, res, next) => {
+  try {
+  } catch (err) {
+    return res.status(500).json({
+      message: "Internal Server Error!",
+      success: false,
+      error: err.message,
+    });
+  }
+};
