@@ -177,6 +177,17 @@ export const applyDoctor = async (req, res, next) => {
 //************ MARK ALL NOTIFICATIONS AS SEEN *******************/
 export const markAllNotificationsAsSeen = async (req, res, next) => {
   try {
+    const user = await UserModel.findOne({ _id: req.body.userId });
+    const unSeenNotifications = user.unSeenNotifications;
+    user.seenNotifications = unSeenNotifications;
+    user.unSeenNotifications = [];
+    const updatedUser = await UserModel.findByIdAndUpdate(user._id, user);
+    updatedUser.password = undefined; //Password hide
+    return res.status(200).json({
+      success: true,
+      message: "All notifications marked as seen!",
+      data: updatedUser,
+    });
   } catch (err) {
     return res.status(500).json({
       message: "Internal Server Error!",
