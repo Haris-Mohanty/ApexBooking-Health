@@ -78,10 +78,9 @@ export const applyDoctorAccount = async (data) => {
 // ********** MARK ALL NOTIFICATIONS AS SEEN **************/
 export const markAllNotificationsAsSeen = async (userId) => {
   try {
-    const response = await axios.post(
-      "/auth/mark-all-notifications-as-seen",
-      userId
-    );
+    const response = await axios.post("/auth/mark-all-notifications-as-seen", {
+      userId,
+    });
 
     if (response.status === 200) {
       const resData = await response.data;

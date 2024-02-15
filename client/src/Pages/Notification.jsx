@@ -4,6 +4,8 @@ import { Tabs } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { hideLoading, showLoading } from "../redux/spinnerSlice";
+import { markAllNotificationsAsSeen } from "../api/api";
+import { setUser } from "../redux/userSlice";
 
 const Notification = () => {
   const { user } = useSelector((state) => state.user);
@@ -14,7 +16,9 @@ const Notification = () => {
     const userId = user._id;
     try {
       dispatch(showLoading());
-      
+      const response = await markAllNotificationsAsSeen(userId);
+      console.log(response)
+      // dispatch(setUser(response.data));
       dispatch(hideLoading());
     } catch (err) {
       dispatch(hideLoading());
