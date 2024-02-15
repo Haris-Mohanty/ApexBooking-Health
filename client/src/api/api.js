@@ -56,7 +56,7 @@ export const getUserInfo = async () => {
   }
 };
 
-// ********* APPLY DOCTOR ACCOUNT ************/
+// ************* APPLY DOCTOR ACCOUNT ******************/
 export const applyDoctorAccount = async (data) => {
   try {
     const response = await axios.post("/auth/apply-doctor", data, {
@@ -65,6 +65,25 @@ export const applyDoctorAccount = async (data) => {
       },
     });
     if (response.status === 201) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+// ********** MARK ALL NOTIFICATIONS AS SEEN **************/
+export const markAllNotificationsAsSeen = async (userId) => {
+  try {
+    const response = await axios.post(
+      "/auth/mark-all-notifications-as-seen",
+      userId
+    );
+
+    if (response.status === 200) {
       const resData = await response.data;
       return resData;
     } else {
