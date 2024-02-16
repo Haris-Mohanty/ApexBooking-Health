@@ -12,12 +12,12 @@ const Notification = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  //Mark all notifications as seen
   const markAllAsSeen = async () => {
     const userId = user._id;
     try {
       dispatch(showLoading());
       const response = await markAllNotificationsAsSeen(userId);
-      console.log(response);
       dispatch(setUser(response.data));
       dispatch(hideLoading());
     } catch (err) {
