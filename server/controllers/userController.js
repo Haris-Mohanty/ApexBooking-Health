@@ -202,3 +202,29 @@ export const markAllNotificationsAsSeen = async (req, res, next) => {
     });
   }
 };
+
+//************ DELETE ALL SEEN NOTIFICATIONS *******************/
+export const deleteAllSeenNotifications = async (req, res, next) => {
+  try {
+    const user = await UserModel.findOne({ _id: req.body.userId });
+
+    //Clear the seenNotifications array
+    user.seenNotifications = [];
+
+    //Save the updated user
+    const updatedUser = await user.save();
+    updatedUser.password = undefined;
+
+    return res.status(200).json({
+      success: true,
+      message: "All seen notifications deleted!",
+      data: updatedUser,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+      error: err.message,
+    });
+  }
+};
