@@ -17,8 +17,8 @@ const Notification = () => {
     try {
       dispatch(showLoading());
       const response = await markAllNotificationsAsSeen(userId);
-      console.log(response)
-      // dispatch(setUser(response.data));
+      console.log(response);
+      dispatch(setUser(response.data));
       dispatch(hideLoading());
     } catch (err) {
       dispatch(hideLoading());
@@ -39,7 +39,7 @@ const Notification = () => {
                 Mark all as seen
               </h6>
             </div>
-            {user.unSeenNotifications.map((notification, index) => (
+            {user?.unSeenNotifications.map((notification, index) => (
               <div
                 key={index}
                 className="card p-2 mb-2"
@@ -55,6 +55,15 @@ const Notification = () => {
                 Delete all
               </h6>
             </div>
+            {user?.seenNotifications.map((notification, index) => (
+              <div
+                key={index}
+                className="card p-2 mb-2"
+                onClick={() => navigate(notification.onClickPath)}
+              >
+                <div className="card-text">{notification.message}</div>
+              </div>
+            ))}
           </Tabs.TabPane>
         </Tabs>
       </Layout>

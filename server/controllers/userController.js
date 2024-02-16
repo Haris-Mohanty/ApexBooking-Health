@@ -179,9 +179,15 @@ export const markAllNotificationsAsSeen = async (req, res, next) => {
   try {
     const user = await UserModel.findOne({ _id: req.body.userId });
     const unSeenNotifications = user.unSeenNotifications;
-    user.seenNotifications = unSeenNotifications;
+
+    //Append unSeenNotifications to seenNotifications array
+    user.seenNotifications.push(...unSeenNotifications);
+
+    //Clear unSeenNotifications array
     user.unSeenNotifications = [];
-    const updatedUser = await UserModel.findByIdAndUpdate(user._id, user);
+
+    //Save the Updated user
+    const updatedUser = await user.save();
     updatedUser.password = undefined; //Password hide
     return res.status(200).json({
       success: true,
