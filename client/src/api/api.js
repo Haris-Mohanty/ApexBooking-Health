@@ -92,3 +92,14 @@ export const markAllNotificationsAsSeen = async (userId) => {
     throw err;
   }
 };
+
+// ********** DELETE ALL SEEN NOTIFICATIONS **************/
+export const deleteAllSeenNotifications = async (userId) => {
+  try {
+    const response = await axios.post("/auth/delete-all-seen-notifications", {
+      userId,
+    });
+  } catch (err) {
+    throw err;
+  }
+};
