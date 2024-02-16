@@ -99,6 +99,13 @@ export const deleteAllSeenNotifications = async (userId) => {
     const response = await axios.post("/auth/delete-all-seen-notifications", {
       userId,
     });
+
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
   } catch (err) {
     throw err;
   }
