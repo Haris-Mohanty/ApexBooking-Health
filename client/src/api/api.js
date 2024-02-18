@@ -110,3 +110,41 @@ export const deleteAllSeenNotifications = async (userId) => {
     throw err;
   }
 };
+
+// ********** GET ALL USERS ***********/
+export const getAllUser = async () => {
+  try {
+    const response = await axios.get("/admin/users", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+// ********** GET ALL DOCTORS ***********/
+export const getAllDoctor = async () => {
+  try {
+    const response = await axios.get("/admin/doctors", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
