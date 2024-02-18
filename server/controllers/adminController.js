@@ -4,7 +4,7 @@ import UserModel from "../Models/UserModel.js";
 //************* GET ALL USER **********/
 export const getAllUser = async (req, res, next) => {
   try {
-    const users = await UserModel.find({});
+    const users = await UserModel.find({}, { password: 0 }); //Hide password field
 
     //Success res
     return res.status(200).json({

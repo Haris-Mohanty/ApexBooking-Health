@@ -114,7 +114,7 @@ export const deleteAllSeenNotifications = async (userId) => {
 // ********** GET ALL USERS ***********/
 export const getAllUser = async () => {
   try {
-    const response = await axios.get("/admin/users", {
+    const response = await axios.get("/admin/getAllUser", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -133,7 +133,7 @@ export const getAllUser = async () => {
 // ********** GET ALL DOCTORS ***********/
 export const getAllDoctor = async () => {
   try {
-    const response = await axios.get("/admin/doctors", {
+    const response = await axios.get("/admin/getAllDoctors", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
