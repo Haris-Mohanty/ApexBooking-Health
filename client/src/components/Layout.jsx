@@ -60,12 +60,12 @@ const Layout = ({ children }) => {
     },
     {
       name: "Users",
-      path: "/users",
+      path: "/admin/users",
       icon: "ri-user-line",
     },
     {
       name: "Doctors",
-      path: "/doctors",
+      path: "/admin/doctors",
       icon: "ri-user-star-line",
     },
     {
