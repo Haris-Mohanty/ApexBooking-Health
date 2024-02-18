@@ -218,7 +218,7 @@ export const deleteAllSeenNotifications = async (req, res, next) => {
     return res.status(200).json({
       success: true,
       message: "All seen notifications deleted!",
-      data: updatedUser,
+      data: updatedUser, 
     });
   } catch (err) {
     return res.status(500).json({

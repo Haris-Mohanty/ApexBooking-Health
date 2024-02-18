@@ -10,6 +10,8 @@ import Homepage from "./Pages/Homepage";
 import PublicRoute from "./components/routes/PublicRoute";
 import ApplyDoctor from "./Pages/ApplyDoctor";
 import Notification from "./Pages/Notification";
+import Users from "./Pages/admin/Users";
+import Doctors from "./Pages/admin/Doctors";
 
 function App() {
   return (
@@ -31,6 +33,22 @@ function App() {
           element={
             <ProtectedRoute>
               <ApplyDoctor />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute>
+              <Users />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/doctors"
+          element={
+            <ProtectedRoute>
+              <Doctors />
             </ProtectedRoute>
           }
         />
