@@ -2,18 +2,25 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { getAllDoctor } from "../../api/api";
 import { Table } from "antd";
+import { useDispatch } from "react-redux";
+import { hideLoading, showLoading } from "../../redux/spinnerSlice";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
+  const dispatch = useDispatch();
 
   //Fetch all doctors req
   const fetchAllDoctors = async () => {
     try {
+      dispatch(showLoading());
       const res = await getAllDoctor();
+      dispatch(hideLoading());
+
       if (res.success) {
         setDoctors(res.data);
       }
     } catch (err) {
+      dispatch(hideLoading());
       console.log(err);
     }
   };
@@ -54,7 +61,7 @@ const Doctors = () => {
       dataIndex: "feePerConsultation",
     },
     {
-      title: "Created At",
+      title: "Created",
       dataIndex: "createdAt",
       render: (createdAt) => new Date(createdAt).toLocaleDateString(),
     },

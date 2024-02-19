@@ -20,7 +20,7 @@ export const getAllUser = async (req, res, next) => {
   }
 };
 
-//************* GET ALL DOCTORS **********/
+//**************** GET ALL DOCTORS *************/
 export const getAllDoctor = async (req, res, next) => {
   try {
     const doctors = await DoctorModel.find({});
@@ -30,6 +30,19 @@ export const getAllDoctor = async (req, res, next) => {
       success: true,
       data: doctors,
     });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+      error: err.message,
+    });
+  }
+};
+
+//********* CHANGE ACCOUNT STATUS (DOCTOR ACCOUNT) ********/
+export const changeAccountStatus = async (req, res) => {
+  try {
+    
   } catch (err) {
     return res.status(500).json({
       success: false,
