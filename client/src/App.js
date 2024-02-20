@@ -12,6 +12,7 @@ import ApplyDoctor from "./Pages/ApplyDoctor";
 import Notification from "./Pages/Notification";
 import Users from "./Pages/admin/Users";
 import Doctors from "./Pages/admin/Doctors";
+import DoctorProfile from "./Pages/doctor/DoctorProfile";
 
 function App() {
   return (
@@ -57,6 +58,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Notification />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/doctor/profile:id"
+          element={
+            <ProtectedRoute>
+              <DoctorProfile />
             </ProtectedRoute>
           }
         />

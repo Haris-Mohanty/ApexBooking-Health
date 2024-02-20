@@ -4,6 +4,7 @@ import { changeAccountStatus, getAllDoctor } from "../../api/api";
 import { Table } from "antd";
 import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../../redux/spinnerSlice";
+import toast from "react-hot-toast";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -26,17 +27,16 @@ const Doctors = () => {
   };
 
   //Change Doctor account status
-  const handleAccountStatus = async (record, statuss) => {
-    const doctorId = record.userId;
-    const status = statuss;
-    const data = { doctorId, status };
+  const handleAccountStatus = async (record, status) => {
     try {
       dispatch(showLoading());
-      const res = await changeAccountStatus(data);
+      const res = await changeAccountStatus(record._id, status);
+      toast.success(res.message);
       dispatch(hideLoading());
       console.log(res);
     } catch (err) {
       dispatch(hideLoading());
+      toast.error(err.response.data.message);
       console.log(err);
     }
   };

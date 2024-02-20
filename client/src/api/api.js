@@ -150,13 +150,17 @@ export const getAllDoctor = async () => {
 };
 
 // ********** CHANGE DOCTOR ACCOUNT STATUS ***********/
-export const changeAccountStatus = async (data) => {
+export const changeAccountStatus = async (doctorId, status) => {
   try {
-    const response = await axios.post("/admin/changeAccountStatus", data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await axios.post(
+      "/admin/changeAccountStatus",
+      { doctorId, status },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
 
     if (response.status === 201) {
       const resData = await response.data;
