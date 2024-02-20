@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
-import { getAllDoctor } from "../../api/api";
+import { changeAccountStatus, getAllDoctor } from "../../api/api";
 import { Table } from "antd";
 import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../../redux/spinnerSlice";
@@ -19,6 +19,22 @@ const Doctors = () => {
       if (res.success) {
         setDoctors(res.data);
       }
+    } catch (err) {
+      dispatch(hideLoading());
+      console.log(err);
+    }
+  };
+
+  //Change Doctor account status
+  const handleAccountStatus = async (record, statuss) => {
+    const doctorId = record.userId;
+    const status = statuss;
+    const data = { doctorId, status };
+    try {
+      dispatch(showLoading());
+      const res = await changeAccountStatus(data);
+      dispatch(hideLoading());
+      console.log(res);
     } catch (err) {
       dispatch(hideLoading());
       console.log(err);
@@ -71,7 +87,12 @@ const Doctors = () => {
       render: (text, record) => (
         <div className="d-flex">
           {record.status === "pending" ? (
-            <button className="btn btn-success">Apv.</button>
+            <button
+              className="btn btn-success"
+              onClick={() => handleAccountStatus(record, "approved")}
+            >
+              Apv.
+            </button>
           ) : (
             <button className="btn btn-danger">Rej.</button>
           )}
