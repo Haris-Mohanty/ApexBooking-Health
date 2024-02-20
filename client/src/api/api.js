@@ -148,3 +148,23 @@ export const getAllDoctor = async () => {
     throw err;
   }
 };
+
+// ********** CHANGE DOCTOR ACCOUNT STATUS ***********/
+export const changeAccountStatus = async (data) => {
+  try {
+    const response = await axios.post("/admin/changeAccountStatus", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    if (response.status === 201) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};

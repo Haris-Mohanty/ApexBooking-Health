@@ -68,7 +68,6 @@ export const changeAccountStatus = async (req, res) => {
       message: `Your doctor account request has ${status}.`,
       onclickPath: "/notifications",
     });
-
     user.isDoctor === "approved" ? true : false;
     user.save();
 
