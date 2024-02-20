@@ -74,7 +74,26 @@ const Layout = ({ children }) => {
       icon: "ri-profile-line",
     },
   ];
-  const menuTobeRendered = user && user.isAdmin ? adminMenu : userMenu;
+  //Nav Menu for Doctor
+  const doctorMenu = [
+    {
+      name: "Home",
+      path: "/",
+      icon: "ri-home-2-line",
+    },
+    {
+      name: "Appointments",
+      path: "/appointments",
+      icon: "ri-calendar-schedule-line",
+    },
+    {
+      name: "Profile",
+      path: `/doctor/profile/${user?._id}`,
+      icon: "ri-profile-line",
+    },
+  ];
+  const menuTobeRendered =
+    user && user.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
 
   return (
     <>
