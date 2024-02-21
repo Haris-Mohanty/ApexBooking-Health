@@ -33,11 +33,9 @@ const Doctors = () => {
       const res = await changeAccountStatus(record._id, status);
       toast.success(res.message);
       dispatch(hideLoading());
-      console.log(res);
     } catch (err) {
       dispatch(hideLoading());
       toast.error(err.response.data.message);
-      console.log(err);
     }
   };
 
