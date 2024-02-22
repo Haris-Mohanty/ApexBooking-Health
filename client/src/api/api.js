@@ -172,3 +172,19 @@ export const changeAccountStatus = async (doctorId, status) => {
     throw err;
   }
 };
+
+// ********** GET DOCTOR INFO ***********/
+export const getDoctorInfo = async (userId) => {
+  try {
+    const response = await axios.get("/doctor/get-doctor-info", userId);
+
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
