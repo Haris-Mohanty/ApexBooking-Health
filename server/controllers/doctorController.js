@@ -1,5 +1,6 @@
 import DoctorModel from "../Models/DoctorModel.js";
 
+//************** GET DOCTOT INFO ***********/
 export const getDoctorInfo = async (req, res) => {
   try {
     const doctor = await DoctorModel.findOne({ userId: req.body.userId });
@@ -15,6 +16,18 @@ export const getDoctorInfo = async (req, res) => {
       message: "Doctor data fetched successfully!",
       data: doctor,
     });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+      error: err.message,
+    });
+  }
+};
+
+//************** UPDATE DOCTOT PROFILE ***********/
+export const updateDoctorProfile = async (req, res) => {
+  try {
   } catch (err) {
     return res.status(500).json({
       success: false,
