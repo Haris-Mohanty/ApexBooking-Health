@@ -6,7 +6,7 @@ import { getDoctorInfo } from "../controllers/doctorController.js";
 const router = express.Router();
 
 //Get doctor info by doctor ID
-router.get("/get-doctor-info", authMiddleware, getDoctorInfo);
+router.post("/get-doctor-info", authMiddleware, getDoctorInfo);
 
 //Export
 export default router;

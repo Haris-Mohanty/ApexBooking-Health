@@ -176,7 +176,11 @@ export const changeAccountStatus = async (doctorId, status) => {
 // ********** GET DOCTOR INFO ***********/
 export const getDoctorInfo = async (userId) => {
   try {
-    const response = await axios.get("/doctor/get-doctor-info", userId);
+    const response = await axios.post("/doctor/get-doctor-info", userId, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
     if (response.status === 200) {
       const resData = await response.data;
