@@ -28,10 +28,26 @@ const DoctorProfile = () => {
     }
   };
 
-  console.log(doctor);
-
   // Update doctor profile
-  const onFinish = async (values) => {};
+  const onFinish = async (values) => {
+    const data = {
+      ...values,
+      userId: user._id,
+      timings: [
+        moment(values.timings[0]).format("HH:mm"),
+        moment(values.timings[1]).format("HH:mm"),
+      ],
+    };
+    try {
+      dispatch(showLoading());
+      // const response = await 
+      console.log(response);
+      dispatch(hideLoading());
+    } catch (err) {
+      dispatch(hideLoading());
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     fetchDoctorInfo();

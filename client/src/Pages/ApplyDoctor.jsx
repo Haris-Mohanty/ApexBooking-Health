@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { hideLoading, showLoading } from "../redux/spinnerSlice";
 import { applyDoctorAccount } from "../api/api";
+import moment from "moment";
 
 const ApplyDoctor = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const ApplyDoctor = () => {
   const onFinish = async (values) => {
     const userId = user._id;
     const data = { ...values, userId };
+    data.timings = values.timings.map((time) => time.format("HH:mm"));
     try {
       dispatch(showLoading());
       await applyDoctorAccount(data);

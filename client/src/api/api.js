@@ -192,3 +192,23 @@ export const getDoctorInfo = async (userId) => {
     throw err;
   }
 };
+
+// ********** DOCTOR PROFILE UPDATE ***********/
+export const updateDoctorProfile = async (data) => {
+  try {
+    const response = await axios.post("/doctor/update-profile", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    if (response.status === 201) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
