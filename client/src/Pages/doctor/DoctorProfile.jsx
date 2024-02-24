@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoading, showLoading } from "../../redux/spinnerSlice";
-import { getDoctorInfo } from "../../api/api";
+import { getDoctorInfo, updateDoctorProfile } from "../../api/api";
 import { useParams } from "react-router-dom";
 import { Button, Col, Form, Input, InputNumber, Row, TimePicker } from "antd";
 import moment from "moment";
+import toast from "react-hot-toast";
 
 const DoctorProfile = () => {
   const { user } = useSelector((state) => state.user);
@@ -40,12 +41,12 @@ const DoctorProfile = () => {
     };
     try {
       dispatch(showLoading());
-      // const response = await 
-      console.log(response);
+      const response = await updateDoctorProfile(data);
+      toast.success(response.message);
       dispatch(hideLoading());
     } catch (err) {
       dispatch(hideLoading());
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
