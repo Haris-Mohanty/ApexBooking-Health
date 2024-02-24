@@ -28,6 +28,26 @@ export const getDoctorInfo = async (req, res) => {
 //************** UPDATE DOCTOT PROFILE ***********/
 export const updateDoctorProfile = async (req, res) => {
   try {
+    const doctor = await DoctorModel.findOneAndUpdate(
+      {
+        userId: req.body.userId,
+      },
+      req.body
+    );
+    //Validation
+    if (!doctor) {
+      return res.status(404).json({
+        success: false,
+        message: "Doctor not found.",
+      });
+    }
+
+    //Success res
+    return res.status(201).json({
+      success: true,
+      message: "Doctor Profile Updated!",
+      data: doctor,
+    });
   } catch (err) {
     return res.status(500).json({
       success: false,
