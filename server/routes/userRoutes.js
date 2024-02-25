@@ -6,6 +6,7 @@ import {
   applyDoctor,
   markAllNotificationsAsSeen,
   deleteAllSeenNotifications,
+  getAllDoctors,
 } from "../controllers/userController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 
@@ -30,6 +31,9 @@ router.post("/mark-all-notifications-as-seen", markAllNotificationsAsSeen);
 
 //Delete all seen notifications
 router.post("/delete-all-seen-notifications", deleteAllSeenNotifications);
+
+//Get all doctors
+router.get("/getAllDoctor", getAllDoctors);
 
 //export
 export default router;

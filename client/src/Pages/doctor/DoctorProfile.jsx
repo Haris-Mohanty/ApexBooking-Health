@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoading, showLoading } from "../../redux/spinnerSlice";
 import { getDoctorInfo, updateDoctorProfile } from "../../api/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, Col, Form, Input, InputNumber, Row, TimePicker } from "antd";
 import moment from "moment";
 import toast from "react-hot-toast";
@@ -14,6 +14,7 @@ const DoctorProfile = () => {
 
   const dispatch = useDispatch();
   const params = useParams();
+  const navigate = useNavigate();
 
   //Fetch Doctor information
   const fetchDoctorInfo = async () => {
@@ -42,8 +43,9 @@ const DoctorProfile = () => {
     try {
       dispatch(showLoading());
       const response = await updateDoctorProfile(data);
-      toast.success(response.message);
       dispatch(hideLoading());
+      navigate("/");
+      toast.success(response.message);
     } catch (err) {
       dispatch(hideLoading());
       toast.error(err.response.data.message);
