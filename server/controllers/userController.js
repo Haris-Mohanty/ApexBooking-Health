@@ -218,7 +218,33 @@ export const deleteAllSeenNotifications = async (req, res, next) => {
     return res.status(200).json({
       success: true,
       message: "All seen notifications deleted!",
-      data: updatedUser, 
+      data: updatedUser,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+      error: err.message,
+    });
+  }
+};
+
+//************** GET ALL APPROVED DOCTORS ***********/
+export const getAllApprovedDoctors = async (req, res) => {
+  try {
+    const doctors = await DoctorModel.find({ status: "approved" });
+    if (!doctors) {
+      return res.status(404).json({
+        success: false,
+        message: "Doctor not found.",
+      });
+    }
+
+    //success res
+    return res.status(200).json({
+      success: true,
+      message: "Doctor list fetched successfully!",
+      data: doctors,
     });
   } catch (err) {
     return res.status(500).json({

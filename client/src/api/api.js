@@ -212,3 +212,19 @@ export const updateDoctorProfile = async (data) => {
     throw err;
   }
 };
+
+// ********** GET ALL APPROVED DOCTORS ***********/
+export const getAllApprovedDoctors = async () => {
+  try {
+    const response = await axios.get("/auth/getAllApprovedDoctors");
+
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
