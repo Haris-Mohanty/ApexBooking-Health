@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getAllApprovedDoctors, getUserInfo } from "../api/api";
+import { getAllApprovedDoctors } from "../api/api";
 import Layout from "../components/Layout";
 import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../redux/spinnerSlice";
+import { Row } from "antd";
+import DoctorList from "../components/DoctorList";
 
 const Homepage = () => {
   const [doctors, setDoctors] = useState([]);
   const dispatch = useDispatch();
-
-  //Fetch user info
-  const fetchUserInfo = async () => {
-    try {
-      await getUserInfo();
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   //Get all approved doctors
   const fetchAllApprovedDoctors = async () => {
@@ -32,12 +25,14 @@ const Homepage = () => {
 
   useEffect(() => {
     fetchAllApprovedDoctors();
-    fetchUserInfo();
   }, []);
   return (
     <>
       <Layout>
-        <h1 className="text-center mb-3">Homepage</h1>
+        <h1 className="text-center mb-3">Doctors List</h1>
+        <Row>
+          {doctors && doctors.map((doctor) => <DoctorList key={doctor._id} doctor={doctor} />)}
+        </Row>
       </Layout>
     </>
   );
