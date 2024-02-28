@@ -3,6 +3,7 @@ import { authMiddleware } from "../middleware/authMiddleware.js";
 import {
   getDoctorInfo,
   updateDoctorProfile,
+  getDoctorById,
 } from "../controllers/doctorController.js";
 
 //Router obj
@@ -13,6 +14,9 @@ router.post("/get-doctor-info", authMiddleware, getDoctorInfo);
 
 //Update doctor pofile
 router.post("/update-profile", authMiddleware, updateDoctorProfile);
+
+//Get Doctor By Id
+router.get("/getDoctorById", getDoctorById);
 
 //Export
 export default router;
