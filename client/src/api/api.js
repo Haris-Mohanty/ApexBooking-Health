@@ -228,3 +228,19 @@ export const getAllApprovedDoctors = async () => {
     throw err;
   }
 };
+
+// ********** GET DOCTOR BY ID ***********/
+export const getDoctorById = async (doctorId) => {
+  try {
+    const response = await axios.get("/doctor/getDoctorById", doctorId);
+
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
