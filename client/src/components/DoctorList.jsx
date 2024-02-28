@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const DoctorList = ({ doctor }) => {
   const navigate = useNavigate();
-
+ 
   return (
     <>
     <div className="col-md-3 m-4">
@@ -27,7 +27,7 @@ const DoctorList = ({ doctor }) => {
             </li>
           </ul>
           <button
-            onClick={() => navigate(`/book-appointment/${doctor._id}`)}
+            onClick={() => navigate(`/doctor/book-appointment/${doctor._id}`)}
             className="btn btn-primary w-100"
           >
             Book Appointment
