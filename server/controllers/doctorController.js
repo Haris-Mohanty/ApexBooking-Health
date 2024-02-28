@@ -56,3 +56,30 @@ export const updateDoctorProfile = async (req, res) => {
     });
   }
 };
+
+//************** GET DOCTOR BY ID *************/
+export const getDoctorById = async (req, res) => {
+  try {
+    const doctor = await DoctorModel.findOne({ _id: req.body.doctorId });
+    //Validation
+    if (!doctor) {
+      return res.status(404).json({
+        success: false,
+        message: "Doctor not found.",
+      });
+    }
+
+    //success
+    return res.status(200).json({
+      success: true,
+      message: "Doctor get by id successfully!",
+      data: doctor,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+      error: err.message,
+    });
+  }
+};
