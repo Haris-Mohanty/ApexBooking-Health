@@ -16,7 +16,7 @@ router.post("/get-doctor-info", authMiddleware, getDoctorInfo);
 router.post("/update-profile", authMiddleware, updateDoctorProfile);
 
 //Get Doctor By Id
-router.get("/getDoctorById", getDoctorById);
+router.post("/getDoctorById", authMiddleware, getDoctorById);
 
 //Export
 export default router;

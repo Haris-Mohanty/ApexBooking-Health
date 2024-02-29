@@ -232,7 +232,11 @@ export const getAllApprovedDoctors = async () => {
 // ********** GET DOCTOR BY ID ***********/
 export const getDoctorById = async (doctorId) => {
   try {
-    const response = await axios.get("/doctor/getDoctorById", doctorId);
+    const response = await axios.post("/doctor/getDoctorById", doctorId, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
     if (response.status === 200) {
       const resData = await response.data;
