@@ -229,7 +229,7 @@ export const getAllApprovedDoctors = async () => {
   }
 };
 
-// ********** GET DOCTOR BY ID ***********/
+// ************** GET DOCTOR BY ID ****************/
 export const getDoctorById = async (doctorId) => {
   try {
     const response = await axios.post("/doctor/getDoctorById", doctorId, {
@@ -243,6 +243,24 @@ export const getDoctorById = async (doctorId) => {
       return resData;
     } else {
       throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+// ************** APPOINTMENT BOOKING ****************/
+export const bookingAppointment = async (data) => {
+  try {
+    const response = await axios.post("/auth/book-appointment", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
     }
   } catch (err) {
     throw err;
