@@ -264,7 +264,7 @@ export const bookingAppointment = async (req, res) => {
     await newBookings.save();
 
     //Push notification to user
-    const user = await UserModel.findOne({ _id: req.body.userId });
+    const user = await UserModel.findOne({ _id: req.body.doctorInfo.userId });
     user.unSeenNotifications.push({
       type: "New-Booking-Request",
       message: `A new appointment booking request from ${req.body.userInfo.name}`,
