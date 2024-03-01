@@ -2,6 +2,7 @@ import UserModel from "../Models/UserModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import DoctorModel from "../Models/DoctorModel.js";
+import BookingModel from "../Models/BookingModel.js";
 
 export const register = async (req, res, next) => {
   try {
@@ -245,6 +246,35 @@ export const getAllApprovedDoctors = async (req, res) => {
       success: true,
       message: "Doctor list fetched successfully!",
       data: doctors,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+      error: err.message,
+    });
+  }
+};
+
+//************** BOOK APPOINTMENTS ***********/
+export const bookingAppointment = async (req, res) => {
+  try {
+    req.body.status = "pending";
+    const newBookings = new BookingModel(req.body);
+    await newBookings.save();
+
+    //Push notification to user
+    const user = await UserModel.findOne({ _id: req.body.userId });
+    user.unSeenNotifications.push({
+      type: "New-Booking-Request",
+      message: `A new appointment booking request from ${req.body.userInfo.name}`,
+      onClickPath: "/user/appointments",
+    });
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Appointment booking successfully!",
     });
   } catch (err) {
     return res.status(500).json({
