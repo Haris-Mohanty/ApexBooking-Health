@@ -308,3 +308,41 @@ export const bookingAppointment = async (req, res) => {
     });
   }
 };
+
+//************** BOOK AVAILABILITY ***********/
+export const bookingAvailability = async (req, res) => {
+  try {
+    const { doctorId, date, time } = req.body;
+    const isoDate = moment(date, "DD-MM-YYYY").toISOString();
+    const isoTime = moment(time, "HH:mm").toISOString();
+    const fromTime = moment(isoTime).subtract(1, "hours").toISOString();
+    const toTime = moment(isoTime).add(1, "hours").toISOString();
+
+    const bookings = await BookingModel.find({
+      doctorId,
+      date:isoDate,
+      time: {
+        $gte: fromTime,
+        $lte: toTime,
+      },
+    });
+
+    if (bookings.length > 0) {
+      return res.status(200).json({
+        success: false,
+        message: "Appointment not available at this time",
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: "Appointment available, you can book now!",
+      });
+    }
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+      error: err.message,
+    });
+  }
+};

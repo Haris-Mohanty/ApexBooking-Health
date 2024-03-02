@@ -266,3 +266,21 @@ export const bookingAppointment = async (data) => {
     throw err;
   }
 };
+
+// ****** CHECK APPOINTMENT IS AVAILABLE OR NOT ******/
+export const bookingAvailability = async (data) => {
+  try {
+    const response = await axios.post("/auth/booking-availability", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};

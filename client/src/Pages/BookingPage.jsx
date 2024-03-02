@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import { bookingAppointment, getDoctorById } from "../api/api";
+import {
+  bookingAppointment,
+  bookingAvailability,
+  getDoctorById,
+} from "../api/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoading, showLoading } from "../redux/spinnerSlice";
 import toast from "react-hot-toast";
 import { DatePicker, TimePicker } from "antd";
 import moment from "moment";
+import axios from "axios";
 
 const BookingPage = () => {
   const params = useParams();
@@ -17,7 +22,7 @@ const BookingPage = () => {
   const [doctor, setDoctor] = useState([]);
   const [date, setDate] = useState();
   const [time, setTime] = useState();
-  const [isAvailable, setIsAvailable] = useState();
+  const [isAvailable, setIsAvailable] = useState(false);
 
   //Fetching doctor
   const fetchDoctorById = async () => {
@@ -51,7 +56,26 @@ const BookingPage = () => {
     } catch (err) {
       dispatch(hideLoading());
       toast.error(err.response.data.message);
-      console.log(err)
+    }
+  };
+
+  //
+  const handleAvailability = async () => {
+    const data = { doctorId: params.doctorId, date, time };
+    try {
+      dispatch(showLoading());
+      const res = await bookingAvailability(data);
+      console.log(res);
+      dispatch(hideLoading());
+      if (res.success) {
+        setIsAvailable(true);
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
+    } catch (err) {
+      dispatch(hideLoading());
+      toast.error(err.response.data.message);
     }
   };
 
@@ -86,6 +110,7 @@ const BookingPage = () => {
               </p>
               <div className="d-flex flex-column">
                 <DatePicker
+                  aria-required={"true"}
                   className="mb-2"
                   format={"DD-MM-YYYY"}
                   onChange={(value) =>
@@ -93,17 +118,26 @@ const BookingPage = () => {
                   }
                 />
                 <TimePicker
+                  aria-required={"true"}
                   className="mb-2"
                   format={"HH:mm"}
-                  onChange={(values) => setTime(moment(values).format("HH:mm"))}
+                  onChange={(time) => setTime(time.format("HH:mm"))}
                 />
-                <button className="btn btn-primary">Check Availability</button>
                 <button
-                  className="btn btn-success mt-2"
-                  onClick={handleBooking}
+                  className="btn btn-primary"
+                  onClick={handleAvailability}
                 >
-                  Book Now
+                  Check Availability
                 </button>
+
+                {isAvailable && (
+                  <button
+                    className="btn btn-success mt-2"
+                    onClick={handleBooking}
+                  >
+                    Book Now
+                  </button>
+                )}
               </div>
             </div>
           </div>
