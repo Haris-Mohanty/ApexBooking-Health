@@ -8,6 +8,7 @@ import {
   deleteAllSeenNotifications,
   getAllApprovedDoctors,
   bookingAppointment,
+  bookingAvailability,
 } from "../controllers/userController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 
@@ -38,6 +39,9 @@ router.get("/getAllApprovedDoctors", getAllApprovedDoctors);
 
 //Book Appointment
 router.post("/book-appointment", authMiddleware, bookingAppointment);
+
+//Booking availability
+router.post("/booking-availability", authMiddleware, bookingAvailability);
 
 //export
 export default router;

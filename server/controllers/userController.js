@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import DoctorModel from "../Models/DoctorModel.js";
 import BookingModel from "../Models/BookingModel.js";
+import moment from "moment";
 
 export const register = async (req, res, next) => {
   try {
@@ -259,8 +260,31 @@ export const getAllApprovedDoctors = async (req, res) => {
 //************** BOOK APPOINTMENTS ***********/
 export const bookingAppointment = async (req, res) => {
   try {
-    req.body.status = "pending";
-    const newBookings = new BookingModel(req.body);
+    //Get data
+    let { doctorId, userId, doctorInfo, userInfo, date, time, status } =
+      req.body;
+    if (!date || !time) {
+      return res.status(422).json({
+        success: false,
+        message: "Please select date and time!",
+      });
+    }
+
+    //Change date and time to ISO String (Used for convert date object to string obj) for check availability
+    date = moment(date, "DD-MM-YYYY").toISOString();
+    time = moment(time, "HH:mm").toISOString();
+    status = "pending";
+
+    //Add bookings
+    const newBookings = new BookingModel({
+      doctorId,
+      userId,
+      doctorInfo,
+      userInfo,
+      date,
+      time,
+      status,
+    });
     await newBookings.save();
 
     //Push notification to user

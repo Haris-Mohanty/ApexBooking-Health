@@ -51,6 +51,7 @@ const BookingPage = () => {
     } catch (err) {
       dispatch(hideLoading());
       toast.error(err.response.data.message);
+      console.log(err)
     }
   };
 
@@ -93,8 +94,8 @@ const BookingPage = () => {
                 />
                 <TimePicker
                   className="mb-2"
-                  format={"HH:MM"}
-                  onChange={(values) => setTime(moment(values).format("HH-MM"))}
+                  format={"HH:mm"}
+                  onChange={(values) => setTime(moment(values).format("HH:mm"))}
                 />
                 <button className="btn btn-primary">Check Availability</button>
                 <button
