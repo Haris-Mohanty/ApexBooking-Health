@@ -320,7 +320,7 @@ export const bookingAvailability = async (req, res) => {
 
     const bookings = await BookingModel.find({
       doctorId,
-      date:isoDate,
+      date: isoDate,
       time: {
         $gte: fromTime,
         $lte: toTime,
@@ -338,6 +338,32 @@ export const bookingAvailability = async (req, res) => {
         message: "Appointment available, you can book now!",
       });
     }
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+      error: err.message,
+    });
+  }
+};
+
+//************** GET USER APPOINTMENTS ***********/
+export const userAppointments = async (req, res) => {
+  try {
+    const appointments = await BookingModel.find({ userId: req.body.userId });
+    if (!appointments) {
+      return res.status(404).json({
+        success: false,
+        message: "No appointments found!",
+      });
+    }
+
+    //Success res
+    return res.status(200).json({
+      success: true,
+      message: "User Appointments Fetched Successfully!",
+      data: appointments,
+    });
   } catch (err) {
     return res.status(500).json({
       success: false,
