@@ -116,6 +116,9 @@ const BookingPage = () => {
                   onChange={(value) =>
                     setDate(moment(value).format("DD-MM-YYYY"))
                   }
+                  disabledDate={(current) =>
+                    current && current < moment().startOf("day")
+                  }
                 />
                 <TimePicker
                   aria-required={"true"}

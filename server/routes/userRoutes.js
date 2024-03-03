@@ -9,6 +9,7 @@ import {
   getAllApprovedDoctors,
   bookingAppointment,
   bookingAvailability,
+  userAppointments,
 } from "../controllers/userController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 
@@ -42,6 +43,9 @@ router.post("/book-appointment", authMiddleware, bookingAppointment);
 
 //Booking availability
 router.post("/booking-availability", authMiddleware, bookingAvailability);
+
+//Get appointments
+router.get("/user-appointments", userAppointments);
 
 //export
 export default router;
