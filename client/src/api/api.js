@@ -261,6 +261,8 @@ export const bookingAppointment = async (data) => {
     if (response.status === 200) {
       const resData = await response.data;
       return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
     }
   } catch (err) {
     throw err;
@@ -279,8 +281,25 @@ export const bookingAvailability = async (data) => {
     if (response.status === 200) {
       const resData = await response.data;
       return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
     }
   } catch (err) {
     console.log(err);
+  }
+};
+
+// ****** GET USER APPOINTMENTS ******/
+export const getUserAppointments = async (userId) => {
+  try {
+    const response = await axios.get("/auth/user-appointments", userId);
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
   }
 };
