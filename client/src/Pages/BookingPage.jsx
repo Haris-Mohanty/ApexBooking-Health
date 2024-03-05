@@ -11,7 +11,6 @@ import { hideLoading, showLoading } from "../redux/spinnerSlice";
 import toast from "react-hot-toast";
 import { DatePicker, TimePicker } from "antd";
 import moment from "moment";
-import axios from "axios";
 
 const BookingPage = () => {
   const params = useParams();

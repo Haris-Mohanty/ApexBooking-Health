@@ -290,9 +290,13 @@ export const bookingAvailability = async (data) => {
 };
 
 // ****** GET USER APPOINTMENTS ******/
-export const getUserAppointments = async (userId) => {
+export const getUserAppointments = async () => {
   try {
-    const response = await axios.get("/auth/user-appointments", userId);
+    const response = await axios.get("/auth/user-appointments", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     if (response.status === 200) {
       const resData = await response.data;
       return resData;
