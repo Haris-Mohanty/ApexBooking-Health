@@ -45,7 +45,7 @@ router.post("/book-appointment", authMiddleware, bookingAppointment);
 router.post("/booking-availability", authMiddleware, bookingAvailability);
 
 //Get appointments
-router.get("/user-appointments", userAppointments);
+router.get("/user-appointments", authMiddleware, userAppointments);
 
 //export
 export default router;

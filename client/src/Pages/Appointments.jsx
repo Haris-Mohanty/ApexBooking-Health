@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { getUserAppointments } from "../api/api";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../redux/spinnerSlice";
 
 const Appointments = () => {
-  const [appointments, setAppointments] = useState();
-  const { user } = useSelector((state) => state.user);
+  const [appointments, setAppointments] = useState([]);
   const dispatch = useDispatch();
 
   const fetchUserAppointments = async () => {
     try {
       dispatch(showLoading());
       const res = await getUserAppointments();
-      console.log(res)
       setAppointments(res.data);
       dispatch(hideLoading());
     } catch (err) {
