@@ -350,7 +350,9 @@ export const bookingAvailability = async (req, res) => {
 //************** GET USER APPOINTMENTS ***********/
 export const userAppointments = async (req, res) => {
   try {
-    const appointments = await BookingModel.find({ userId: req.body.userId });
+    const appointments = await BookingModel.find({ userId: req.body.userId })
+      .populate("userInfo")
+      .populate("doctorInfo");
     if (!appointments) {
       return res.status(404).json({
         success: false,
