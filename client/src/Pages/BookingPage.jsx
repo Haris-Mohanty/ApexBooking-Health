@@ -112,13 +112,12 @@ const BookingPage = () => {
                   aria-required={"true"}
                   className="mb-2"
                   format={"DD-MM-YYYY"}
-                  onChange={(value) =>
-                    setDate(moment(value).format("DD-MM-YYYY"))
-                  }
+                  onChange={(value) => setDate(value.format("DD-MM-YYYY"))}
                   disabledDate={(current) =>
                     current && current < moment().startOf("day")
                   }
                 />
+
                 <TimePicker
                   aria-required={"true"}
                   className="mb-2"

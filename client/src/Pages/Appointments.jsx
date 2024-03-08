@@ -66,8 +66,15 @@ const Appointments = () => {
 
   return (
     <Layout>
-      <h1 className="m-4 text-center">Appointments List</h1>
-      <Table className="mt-3" columns={columns} dataSource={appointments} />
+      <div className="table-responsive">
+        <h1 className="m-4 text-center">Appointments List</h1>
+        <Table
+          className="mt-3"
+          columns={columns}
+          dataSource={appointments}
+          rowKey={(record) => record._id}
+        />
+      </div>
     </Layout>
   );
 };

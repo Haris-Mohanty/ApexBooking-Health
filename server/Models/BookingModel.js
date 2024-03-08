@@ -11,12 +11,14 @@ const bookingSchema = new mongoose.Schema(
       required: true,
     },
     doctorInfo: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: "Doctor",
     },
     userInfo: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: "User",
     },
     date: {
       type: String,
