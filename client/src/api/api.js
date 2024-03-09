@@ -307,3 +307,23 @@ export const getUserAppointments = async () => {
     throw err;
   }
 };
+
+// ****** GET DOCTOR APPOINTMENTS ******/
+export const getDoctorAppointments = async () => {
+  try {
+    const response = await axios.get("/doctor/doctor-appointments", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
