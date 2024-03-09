@@ -1,10 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
+import { useDispatch } from "react-redux";
+import { hideLoading, showLoading } from "../../redux/spinnerSlice";
+import { getDoctorAppointments } from "../../api/api";
+import moment from "moment";
+import { Table } from "antd";
 
 const DoctorAppointments = () => {
+  const [appointments, setAppointments] = useState([]);
+  const dispatch = useDispatch();
+
+  //Fetch Doctor Appointments
+  const fetchDoctorAppointments = async () => {
+    try {
+      dispatch(showLoading());
+      const res = await getDoctorAppointments();
+      setAppointments(res.data);
+      dispatch(hideLoading());
+    } catch (err) {
+      dispatch(hideLoading());
+      console.log(err);
+    }
+  };
+
+  console.log(appointments);
+
+  useEffect(() => {
+    fetchDoctorAppointments();
+  }, []);
+
+  // Antd table design
+  const columns = [
+    {
+      title: "User Name",
+      dataIndex: "name",
+      render: (text, record) => <span>{record.userInfo.name}</span>,
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      render: (text, record) => <span>{record.userInfo.email}</span>,
+    },
+    {
+      title: "Date & Time",
+      dataIndex: "date",
+      render: (text, record) => (
+        <span>
+          {moment(record.date).format("DD-MM-YYYY")} &nbsp;
+          {moment(record.time).format("HH:mm")}
+        </span>
+      ),
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+    },
+  ];
+
   return (
     <Layout>
-      <h1 className="m-4 text-center">Appointments List</h1>
+      <div className="table-responsive">
+        <h1 className="m-4 text-center">Appointments List</h1>
+        <Table
+          columns={columns}
+          dataSource={appointments}
+          rowKey={(record) => record._id}
+          scroll={{ x: "max-content" }}
+        />
+      </div>
     </Layout>
   );
 };
