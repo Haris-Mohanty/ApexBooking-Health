@@ -22,7 +22,6 @@ const Appointments = () => {
       dispatch(hideLoading());
     }
   };
-  console.log(appointments);
 
   useEffect(() => {
     fetchUserAppointments();
@@ -31,23 +30,29 @@ const Appointments = () => {
   //Create antd table
   const columns = [
     {
-      title: "ID",
-      dataIndex: "_id",
+      title: "Doctor Name",
+      dataIndex: "name",
+      render: (text, record) => (
+        <span>
+          {record.doctorInfo.firstName} {record.doctorInfo.lastName}
+        </span>
+      ),
     },
-    // {
-    //   title: "Name",
-    //   dataIndex: "name",
-    //   render: (text, record) => (
-    //     <span>
-    //       {record.doctorid.firstName} {record.doctorId.lastName}
-    //     </span>
-    //   ),
-    // },
-    // {
-    //   title: "Phone",
-    //   dataIndex: "phone",
-    //   render: (text, record) => <span>{record.doctorId.phone}</span>,
-    // },
+    {
+      title: "Department",
+      dataIndex: "department",
+      render: (text, record) => <span>{record.doctorInfo.department}</span>,
+    },
+    {
+      title: "Experience",
+      dataIndex: "experience",
+      render: (text, record) => <span>{record.doctorInfo.experience}</span>,
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      render: (text, record) => <span>{record.doctorInfo.phoneNumber}</span>,
+    },
     {
       title: "Date & Time",
       dataIndex: "date",
@@ -73,6 +78,7 @@ const Appointments = () => {
           columns={columns}
           dataSource={appointments}
           rowKey={(record) => record._id}
+          scroll={{ x: "max-content" }}
         />
       </div>
     </Layout>

@@ -100,7 +100,9 @@ export const getDoctorAppointments = async (req, res) => {
     //Get appointments
     const doctorAppointments = await BookingModel.find({
       doctorId: doctor._id,
-    });
+    })
+      .populate("doctorInfo")
+      .populate("userInfo");
     if (!doctorAppointments || doctorAppointments.length === 0) {
       return res.status(404).json({
         success: false,

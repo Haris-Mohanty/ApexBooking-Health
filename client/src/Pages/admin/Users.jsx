@@ -68,6 +68,7 @@ const Users = () => {
           dataSource={users}
           columns={columns}
           rowKey={(record) => record._id}
+          scroll={{ x: "max-content" }}
         />
       </div>
     </Layout>
