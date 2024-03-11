@@ -5,6 +5,7 @@ import {
   updateDoctorProfile,
   getDoctorById,
   getDoctorAppointments,
+  updateAppointmentStatus,
 } from "../controllers/doctorController.js";
 
 //Router obj
@@ -21,6 +22,13 @@ router.post("/getDoctorById", authMiddleware, getDoctorById);
 
 //Get Appointments of Doctor
 router.get("/doctor-appointments", authMiddleware, getDoctorAppointments);
+
+//Appointment status update
+router.post(
+  "/updateAppointmentStatus",
+  authMiddleware,
+  updateAppointmentStatus
+);
 
 //Export
 export default router;

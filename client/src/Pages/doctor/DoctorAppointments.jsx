@@ -27,6 +27,9 @@ const DoctorAppointments = () => {
     fetchDoctorAppointments();
   }, []);
 
+  //Handle Status
+  const handleStatus = () => {};
+
   // Antd table design
   const columns = [
     {
@@ -61,10 +64,16 @@ const DoctorAppointments = () => {
           {record.status === "pending" && (
             <div className="d-flex">
               <button
-                className="btn btn-success"
+                className="btn btn-success mx-2"
                 onClick={() => handleStatus(record, "approved")}
               >
                 Approved
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => handleStatus(record, "reject")}
+              >
+                Reject
               </button>
             </div>
           )}
