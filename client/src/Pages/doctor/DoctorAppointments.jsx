@@ -23,8 +23,6 @@ const DoctorAppointments = () => {
     }
   };
 
-  console.log(appointments);
-
   useEffect(() => {
     fetchDoctorAppointments();
   }, []);
@@ -54,6 +52,24 @@ const DoctorAppointments = () => {
     {
       title: "Status",
       dataIndex: "status",
+    },
+    {
+      title: "Actions",
+      dataIndex: "actions",
+      render: (text, record) => (
+        <div className="d-flex">
+          {record.status === "pending" && (
+            <div className="d-flex">
+              <button
+                className="btn btn-success"
+                onClick={() => handleStatus(record, "approved")}
+              >
+                Approved
+              </button>
+            </div>
+          )}
+        </div>
+      ),
     },
   ];
 
