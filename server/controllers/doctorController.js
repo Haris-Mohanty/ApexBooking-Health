@@ -1,5 +1,6 @@
 import BookingModel from "../Models/BookingModel.js";
 import DoctorModel from "../Models/DoctorModel.js";
+import UserModel from "../Models/UserModel.js";
 
 //************** GET DOCTOT INFO ***********/
 export const getDoctorInfo = async (req, res) => {
@@ -115,6 +116,43 @@ export const getDoctorAppointments = async (req, res) => {
       success: true,
       message: "Doctor Appointments Fetched Successfully!",
       data: doctorAppointments,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+      error: err.message,
+    });
+  }
+};
+
+// ******** UPDATE APPOINTMENT STATUS *****************/
+export const updateAppointmentStatus = async (req, res) => {
+  try {
+    const { appointmentsId, status } = req.body;
+    const appointments = await BookingModel.findByIdAndUpdate(appointmentsId, {
+      status,
+    });
+    if (!appointments) {
+      return res.status(404).json({
+        success: false,
+        message: "Appointment not found",
+      });
+    }
+
+    //Push Notification to user (appointment approved ya reject)
+    const user = await UserModel.findOne({ _id: appointmentsId.userId });
+    user.unSeenNotifications.push({
+      type: "status-updated",
+      message: `Your Appointment has been ${status}`,
+      onClickPath: "doctor-appointments",
+    });
+    await user.save();
+
+    //Success
+    return res.status(200).json({
+      success: true,
+      message: "Appointment status updated!",
     });
   } catch (err) {
     return res.status(500).json({
