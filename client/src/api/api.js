@@ -329,17 +329,13 @@ export const getDoctorAppointments = async () => {
 };
 
 // ******* UPDATE ACCOUNT STATUS *******/
-export const updateAppointmentStatus = async (appointmentId, status) => {
+export const updateAppointmentStatus = async (data) => {
   try {
-    const response = await axios.post(
-      "/doctor/updateAppointmentStatus",
-      { appointmentId, status },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
+    const response = await axios.post("/doctor/updateAppointmentStatus", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
     if (response.status === 200) {
       const resData = await response.data;

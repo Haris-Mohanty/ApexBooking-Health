@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../../redux/spinnerSlice";
-import { getDoctorAppointments } from "../../api/api";
+import { getDoctorAppointments, updateAppointmentStatus } from "../../api/api";
 import moment from "moment";
 import { Table } from "antd";
 
@@ -28,7 +28,19 @@ const DoctorAppointments = () => {
   }, []);
 
   //Handle Status
-  const handleStatus = () => {};
+  const handleStatus = async (record, status) => {
+    try {
+      const appointmentsId = record._id;
+      const data = { appointmentsId, status };
+      dispatch(showLoading());
+      const response = await updateAppointmentStatus(data);
+      console.log(response);
+      dispatch(hideLoading());
+    } catch (err) {
+      dispatch(hideLoading());
+      console.log(err);
+    }
+  };
 
   // Antd table design
   const columns = [
