@@ -327,3 +327,27 @@ export const getDoctorAppointments = async () => {
     throw err;
   }
 };
+
+// ******* UPDATE ACCOUNT STATUS *******/
+export const updateAppointmentStatus = async (appointmentId, status) => {
+  try {
+    const response = await axios.post(
+      "/doctor/updateAppointmentStatus",
+      { appointmentId, status },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      const resData = await response.data;
+      return resData;
+    } else {
+      throw new Error("Unexcepted Error Occurred!");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
