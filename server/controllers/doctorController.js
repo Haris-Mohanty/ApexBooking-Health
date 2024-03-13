@@ -141,7 +141,7 @@ export const updateAppointmentStatus = async (req, res) => {
     }
 
     //Push Notification to user (appointment approved ya reject)
-    const user = await UserModel.findOne({ _id: appointmentsId.userId });
+    const user = await UserModel.findOne({ _id: appointments.userId });
     const unSeenNotifications = user.unSeenNotifications;
     unSeenNotifications.push({
       type: "status-updated",

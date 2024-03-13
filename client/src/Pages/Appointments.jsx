@@ -18,7 +18,6 @@ const Appointments = () => {
       setAppointments(res.data);
       dispatch(hideLoading());
     } catch (err) {
-      console.log(err);
       dispatch(hideLoading());
     }
   };

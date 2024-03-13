@@ -5,6 +5,7 @@ import { hideLoading, showLoading } from "../../redux/spinnerSlice";
 import { getDoctorAppointments, updateAppointmentStatus } from "../../api/api";
 import moment from "moment";
 import { Table } from "antd";
+import toast from "react-hot-toast";
 
 const DoctorAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -34,11 +35,14 @@ const DoctorAppointments = () => {
       const data = { appointmentsId, status };
       dispatch(showLoading());
       const response = await updateAppointmentStatus(data);
-      console.log(response);
+      if (response.success) {
+        toast.success(response.message);
+        fetchDoctorAppointments();
+      }
       dispatch(hideLoading());
     } catch (err) {
       dispatch(hideLoading());
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -83,7 +87,7 @@ const DoctorAppointments = () => {
               </button>
               <button
                 className="btn btn-danger"
-                onClick={() => handleStatus(record, "reject")}
+                onClick={() => handleStatus(record, "rejected")}
               >
                 Reject
               </button>
