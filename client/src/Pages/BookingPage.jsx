@@ -87,7 +87,7 @@ const BookingPage = () => {
       <div className="container mt-4">
         <h1 className="text-center mb-5">Booking Page</h1>
         {doctor && (
-          <div className="card w-50 mt-3">
+          <div className="card w-100 mt-3">
             <div className="card-body">
               <h3 className="card-title text-center">
                 Dr. {doctor.firstName} {doctor.lastName}

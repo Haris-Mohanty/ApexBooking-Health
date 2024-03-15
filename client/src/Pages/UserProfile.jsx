@@ -25,8 +25,6 @@ const UserProfile = () => {
     fetchUserInfo();
   }, []);
 
-  console.log(user);
-
   return (
     <Layout>
       {user && (
